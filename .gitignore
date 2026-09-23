@@ -26,4 +26,5 @@ cloud_scan_report.json
 Thumbs.db
 desktop.ini
 .vscode/
-.idea/_probe_*.py
+.idea/
+_probe_*.py
