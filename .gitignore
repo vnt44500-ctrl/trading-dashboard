@@ -1,0 +1,29 @@
+# Secrets and local state — never commit these.
+.env
+
+# Virtualenv and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Generated analysis state
+signal_tracker.json
+signal_tracker.json.tmp
+market_scan_history.json
+market_scan_history.json.tmp
+
+# Cloud scanner output (rebuilt every run; CI persists the dedup state via
+# actions/cache, never via git)
+cloud_scan_state.json
+cloud_scan_report.json
+
+*.log
+
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/_probe_*.py

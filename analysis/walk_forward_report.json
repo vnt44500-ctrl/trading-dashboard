@@ -1,0 +1,701 @@
+{
+  "generated": "2026-09-20 10:46:51",
+  "engine": "analysis.signal_models (the app's committed engine, unchanged)",
+  "period": "10y",
+  "target_precision": 0.8,
+  "symbols_used": [
+    "AAPL",
+    "MSFT",
+    "NVDA",
+    "AMZN",
+    "GOOGL",
+    "META",
+    "TSLA",
+    "BRK-B",
+    "JPM",
+    "V",
+    "UNH",
+    "XOM",
+    "LLY",
+    "JNJ",
+    "AVGO",
+    "PG",
+    "MA",
+    "HD",
+    "MRK",
+    "PEP",
+    "KO",
+    "COST",
+    "ABBV",
+    "WMT",
+    "MCD",
+    "CSCO",
+    "CRM",
+    "BAC",
+    "ADBE",
+    "PFE",
+    "CVX",
+    "TMO",
+    "ACN",
+    "ABT",
+    "NFLX",
+    "DIS",
+    "LIN",
+    "AMD",
+    "INTC",
+    "WFC",
+    "QCOM",
+    "TXN",
+    "DHR",
+    "NKE",
+    "CMCSA",
+    "ORCL",
+    "CAT",
+    "VZ",
+    "NEE",
+    "AMGN"
+  ],
+  "symbols_skipped": [],
+  "replay_seconds": 783.3,
+  "oof_rows": 290850,
+  "timeframes": {
+    "short": {
+      "rows": 98900,
+      "folds": 4,
+      "symbols": 50,
+      "roc_auc": 0.5593,
+      "skill_base": 0.4964,
+      "drift_base": 0.5481,
+      "trade_base": 0.5386,
+      "operating": {
+        "achieved": false,
+        "threshold": 0.66,
+        "success": 0.634,
+        "coverage": 0.004,
+        "signals": 361,
+        "reason": "Best achievable on this history is 63.4% at threshold 0.66 with 361 signals."
+      },
+      "threshold": 0.66,
+      "signals": 361,
+      "coverage": 0.0037,
+      "skill_success": 0.6343,
+      "trade_success": 0.4404,
+      "directional_success": 0.4543,
+      "expected_return_pct": 0.087,
+      "net_expected_return_pct": -0.013,
+      "avg_trade_r": -0.03,
+      "skill_edge": 0.1379,
+      "trade_edge": -0.0981,
+      "horizon": 5,
+      "headline_thresholds": [
+        {
+          "Threshold": 0.5,
+          "Signals": 98900,
+          "Coverage %": 100.0,
+          "Success %": 54.3,
+          "Skill success %": 54.3,
+          "Trade success %": 48.5,
+          "Directional success %": 49.5,
+          "Expected return %": 0.386
+        },
+        {
+          "Threshold": 0.55,
+          "Signals": 37400,
+          "Coverage %": 37.8,
+          "Success %": 57.5,
+          "Skill success %": 57.5,
+          "Trade success %": 48.2,
+          "Directional success %": 49.3,
+          "Expected return %": 0.372
+        },
+        {
+          "Threshold": 0.6,
+          "Signals": 10272,
+          "Coverage %": 10.4,
+          "Success %": 58.1,
+          "Skill success %": 58.1,
+          "Trade success %": 49.0,
+          "Directional success %": 50.3,
+          "Expected return %": 0.395
+        },
+        {
+          "Threshold": 0.65,
+          "Signals": 361,
+          "Coverage %": 0.4,
+          "Success %": 63.4,
+          "Skill success %": 63.4,
+          "Trade success %": 44.0,
+          "Directional success %": 45.4,
+          "Expected return %": 0.087
+        },
+        {
+          "Threshold": 0.7,
+          "Signals": 344,
+          "Coverage %": 0.3,
+          "Success %": 62.5,
+          "Skill success %": 62.5,
+          "Trade success %": 43.9,
+          "Directional success %": 45.3,
+          "Expected return %": 0.098
+        },
+        {
+          "Threshold": 0.75,
+          "Signals": 343,
+          "Coverage %": 0.3,
+          "Success %": 62.4,
+          "Skill success %": 62.4,
+          "Trade success %": 43.7,
+          "Directional success %": 45.2,
+          "Expected return %": 0.106
+        },
+        {
+          "Threshold": 0.8,
+          "Signals": 340,
+          "Coverage %": 0.3,
+          "Success %": 62.4,
+          "Skill success %": 62.4,
+          "Trade success %": 43.5,
+          "Directional success %": 45.0,
+          "Expected return %": 0.081
+        },
+        {
+          "Threshold": 0.85,
+          "Signals": 336,
+          "Coverage %": 0.3,
+          "Success %": 62.2,
+          "Skill success %": 62.2,
+          "Trade success %": 43.2,
+          "Directional success %": 44.6,
+          "Expected return %": -0.002
+        },
+        {
+          "Threshold": 0.9,
+          "Signals": 108,
+          "Coverage %": 0.1,
+          "Success %": 47.2,
+          "Skill success %": 47.2,
+          "Trade success %": 41.7,
+          "Directional success %": 43.5,
+          "Expected return %": 0.005
+        },
+        {
+          "Threshold": 0.95,
+          "Signals": 104,
+          "Coverage %": 0.1,
+          "Success %": 46.2,
+          "Skill success %": 46.2,
+          "Trade success %": 41.3,
+          "Directional success %": 43.3,
+          "Expected return %": -0.037
+        }
+      ],
+      "years": [
+        {
+          "Year": 2018,
+          "OOF bars": 2200,
+          "Signals": 46,
+          "Drift base %": 48.3,
+          "Skill success %": 34.8,
+          "Trade success %": 26.1,
+          "Skill edge pp": -12.1
+        },
+        {
+          "Year": 2019,
+          "OOF bars": 12600,
+          "Signals": 122,
+          "Drift base %": 60.6,
+          "Skill success %": 70.5,
+          "Trade success %": 48.4,
+          "Skill edge pp": 18.9
+        },
+        {
+          "Year": 2020,
+          "OOF bars": 12650,
+          "Signals": 175,
+          "Drift base %": 56.6,
+          "Skill success %": 64.6,
+          "Trade success %": 45.7,
+          "Skill edge pp": 15.6
+        },
+        {
+          "Year": 2021,
+          "OOF bars": 12600,
+          "Signals": 8,
+          "Drift base %": 57.1,
+          "Skill success %": 75.0,
+          "Trade success %": 12.5,
+          "Skill edge pp": 25.3
+        },
+        {
+          "Year": 2022,
+          "OOF bars": 12550,
+          "Signals": 10,
+          "Drift base %": 49.3,
+          "Skill success %": 80.0,
+          "Trade success %": 70.0,
+          "Skill edge pp": 30.0
+        },
+        {
+          "Year": 2023,
+          "OOF bars": 12500,
+          "Signals": 0,
+          "Drift base %": 55.0,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2024,
+          "OOF bars": 12600,
+          "Signals": 0,
+          "Drift base %": 54.2,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2025,
+          "OOF bars": 12500,
+          "Signals": 0,
+          "Drift base %": 54.4,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2026,
+          "OOF bars": 8700,
+          "Signals": 0,
+          "Drift base %": 51.3,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        }
+      ]
+    },
+    "medium": {
+      "rows": 97600,
+      "folds": 4,
+      "symbols": 50,
+      "roc_auc": 0.5562,
+      "skill_base": 0.4961,
+      "drift_base": 0.5696,
+      "trade_base": 0.5013,
+      "operating": {
+        "achieved": false,
+        "threshold": 0.85,
+        "success": 0.789,
+        "coverage": 0.001,
+        "signals": 57,
+        "reason": "Best achievable on this history is 78.9% at threshold 0.85 with 57 signals."
+      },
+      "threshold": 0.85,
+      "signals": 57,
+      "coverage": 0.0006,
+      "skill_success": 0.7895,
+      "trade_success": 0.7193,
+      "directional_success": 0.7719,
+      "expected_return_pct": 8.893,
+      "net_expected_return_pct": 8.793,
+      "avg_trade_r": 0.833,
+      "skill_edge": 0.2934,
+      "trade_edge": 0.218,
+      "horizon": 15,
+      "headline_thresholds": [
+        {
+          "Threshold": 0.5,
+          "Signals": 97600,
+          "Coverage %": 100.0,
+          "Success %": 53.6,
+          "Skill success %": 53.6,
+          "Trade success %": 41.9,
+          "Directional success %": 48.1,
+          "Expected return %": 1.163
+        },
+        {
+          "Threshold": 0.55,
+          "Signals": 42533,
+          "Coverage %": 43.6,
+          "Success %": 57.3,
+          "Skill success %": 57.3,
+          "Trade success %": 43.2,
+          "Directional success %": 49.5,
+          "Expected return %": 1.205
+        },
+        {
+          "Threshold": 0.6,
+          "Signals": 10662,
+          "Coverage %": 10.9,
+          "Success %": 62.2,
+          "Skill success %": 62.2,
+          "Trade success %": 45.8,
+          "Directional success %": 52.0,
+          "Expected return %": 1.376
+        },
+        {
+          "Threshold": 0.65,
+          "Signals": 2287,
+          "Coverage %": 2.3,
+          "Success %": 63.9,
+          "Skill success %": 63.9,
+          "Trade success %": 49.5,
+          "Directional success %": 56.6,
+          "Expected return %": 1.831
+        },
+        {
+          "Threshold": 0.7,
+          "Signals": 1292,
+          "Coverage %": 1.3,
+          "Success %": 64.2,
+          "Skill success %": 64.2,
+          "Trade success %": 50.3,
+          "Directional success %": 57.0,
+          "Expected return %": 1.498
+        },
+        {
+          "Threshold": 0.75,
+          "Signals": 224,
+          "Coverage %": 0.2,
+          "Success %": 75.9,
+          "Skill success %": 75.9,
+          "Trade success %": 66.5,
+          "Directional success %": 73.7,
+          "Expected return %": 6.204
+        },
+        {
+          "Threshold": 0.8,
+          "Signals": 158,
+          "Coverage %": 0.2,
+          "Success %": 71.5,
+          "Skill success %": 71.5,
+          "Trade success %": 67.7,
+          "Directional success %": 73.4,
+          "Expected return %": 6.277
+        },
+        {
+          "Threshold": 0.85,
+          "Signals": 57,
+          "Coverage %": 0.1,
+          "Success %": 78.9,
+          "Skill success %": 78.9,
+          "Trade success %": 71.9,
+          "Directional success %": 77.2,
+          "Expected return %": 8.893
+        },
+        {
+          "Threshold": 0.9,
+          "Signals": 42,
+          "Coverage %": 0.0,
+          "Success %": 73.8,
+          "Skill success %": 73.8,
+          "Trade success %": 69.0,
+          "Directional success %": 76.2,
+          "Expected return %": 8.861
+        },
+        {
+          "Threshold": 0.95,
+          "Signals": 7,
+          "Coverage %": 0.0,
+          "Success %": 85.7,
+          "Skill success %": 85.7,
+          "Trade success %": 71.4,
+          "Directional success %": 85.7,
+          "Expected return %": 16.176
+        }
+      ],
+      "years": [
+        {
+          "Year": 2018,
+          "OOF bars": 1400,
+          "Signals": 3,
+          "Drift base %": 45.7,
+          "Skill success %": 33.3,
+          "Trade success %": 33.3,
+          "Skill edge pp": -7.3
+        },
+        {
+          "Year": 2019,
+          "OOF bars": 12600,
+          "Signals": 8,
+          "Drift base %": 66.8,
+          "Skill success %": 100.0,
+          "Trade success %": 100.0,
+          "Skill edge pp": 45.6
+        },
+        {
+          "Year": 2020,
+          "OOF bars": 12650,
+          "Signals": 9,
+          "Drift base %": 60.3,
+          "Skill success %": 33.3,
+          "Trade success %": 33.3,
+          "Skill edge pp": -14.8
+        },
+        {
+          "Year": 2021,
+          "OOF bars": 12600,
+          "Signals": 0,
+          "Drift base %": 59.7,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2022,
+          "OOF bars": 12550,
+          "Signals": 22,
+          "Drift base %": 47.4,
+          "Skill success %": 86.4,
+          "Trade success %": 77.3,
+          "Skill edge pp": 38.4
+        },
+        {
+          "Year": 2023,
+          "OOF bars": 12500,
+          "Signals": 0,
+          "Drift base %": 57.0,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2024,
+          "OOF bars": 12600,
+          "Signals": 0,
+          "Drift base %": 56.7,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2025,
+          "OOF bars": 12500,
+          "Signals": 7,
+          "Drift base %": 55.2,
+          "Skill success %": 85.7,
+          "Trade success %": 71.4,
+          "Skill edge pp": 35.3
+        },
+        {
+          "Year": 2026,
+          "OOF bars": 8200,
+          "Signals": 8,
+          "Drift base %": 52.2,
+          "Skill success %": 100.0,
+          "Trade success %": 87.5,
+          "Skill edge pp": 50.6
+        }
+      ]
+    },
+    "long": {
+      "rows": 94350,
+      "folds": 4,
+      "symbols": 50,
+      "roc_auc": 0.5047,
+      "skill_base": 0.4909,
+      "drift_base": 0.5975,
+      "trade_base": 0.4374,
+      "operating": {
+        "achieved": false,
+        "threshold": 0.76,
+        "success": 0.691,
+        "coverage": 0.006999999999999999,
+        "signals": 703,
+        "reason": "Best achievable on this history is 69.1% at threshold 0.76 with 703 signals."
+      },
+      "threshold": 0.76,
+      "signals": 703,
+      "coverage": 0.0075,
+      "skill_success": 0.6913,
+      "trade_success": 0.5164,
+      "directional_success": 0.6771,
+      "expected_return_pct": 7.048,
+      "net_expected_return_pct": 6.948,
+      "avg_trade_r": 0.364,
+      "skill_edge": 0.2005,
+      "trade_edge": 0.0789,
+      "horizon": 40,
+      "headline_thresholds": [
+        {
+          "Threshold": 0.5,
+          "Signals": 94350,
+          "Coverage %": 100.0,
+          "Success %": 50.8,
+          "Skill success %": 50.8,
+          "Trade success %": 33.1,
+          "Directional success %": 44.8,
+          "Expected return %": 3.113
+        },
+        {
+          "Threshold": 0.55,
+          "Signals": 35096,
+          "Coverage %": 37.2,
+          "Success %": 50.2,
+          "Skill success %": 50.2,
+          "Trade success %": 29.1,
+          "Directional success %": 40.6,
+          "Expected return %": 3.542
+        },
+        {
+          "Threshold": 0.6,
+          "Signals": 4275,
+          "Coverage %": 4.5,
+          "Success %": 59.8,
+          "Skill success %": 59.8,
+          "Trade success %": 39.4,
+          "Directional success %": 52.2,
+          "Expected return %": 4.021
+        },
+        {
+          "Threshold": 0.65,
+          "Signals": 3540,
+          "Coverage %": 3.8,
+          "Success %": 61.0,
+          "Skill success %": 61.0,
+          "Trade success %": 40.2,
+          "Directional success %": 53.8,
+          "Expected return %": 3.964
+        },
+        {
+          "Threshold": 0.7,
+          "Signals": 1478,
+          "Coverage %": 1.6,
+          "Success %": 66.0,
+          "Skill success %": 66.0,
+          "Trade success %": 50.1,
+          "Directional success %": 65.4,
+          "Expected return %": 5.72
+        },
+        {
+          "Threshold": 0.75,
+          "Signals": 889,
+          "Coverage %": 0.9,
+          "Success %": 67.0,
+          "Skill success %": 67.0,
+          "Trade success %": 50.6,
+          "Directional success %": 65.7,
+          "Expected return %": 6.679
+        },
+        {
+          "Threshold": 0.8,
+          "Signals": 70,
+          "Coverage %": 0.1,
+          "Success %": 47.1,
+          "Skill success %": 47.1,
+          "Trade success %": 40.0,
+          "Directional success %": 45.7,
+          "Expected return %": 8.901
+        },
+        {
+          "Threshold": 0.85,
+          "Signals": 52,
+          "Coverage %": 0.1,
+          "Success %": 57.7,
+          "Skill success %": 57.7,
+          "Trade success %": 53.8,
+          "Directional success %": 57.7,
+          "Expected return %": 4.045
+        },
+        {
+          "Threshold": 0.9,
+          "Signals": 50,
+          "Coverage %": 0.1,
+          "Success %": 58.0,
+          "Skill success %": 58.0,
+          "Trade success %": 54.0,
+          "Directional success %": 58.0,
+          "Expected return %": 3.976
+        },
+        {
+          "Threshold": 0.95,
+          "Signals": 19,
+          "Coverage %": 0.0,
+          "Success %": 52.6,
+          "Skill success %": 52.6,
+          "Trade success %": 52.6,
+          "Directional success %": 52.6,
+          "Expected return %": 0.337
+        }
+      ],
+      "years": [
+        {
+          "Year": 2019,
+          "OOF bars": 12000,
+          "Signals": 0,
+          "Drift base %": 69.7,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2020,
+          "OOF bars": 12650,
+          "Signals": 7,
+          "Drift base %": 64.9,
+          "Skill success %": 14.3,
+          "Trade success %": 14.3,
+          "Skill edge pp": -37.9
+        },
+        {
+          "Year": 2021,
+          "OOF bars": 12600,
+          "Signals": 15,
+          "Drift base %": 63.6,
+          "Skill success %": 33.3,
+          "Trade success %": 6.7,
+          "Skill edge pp": -9.3
+        },
+        {
+          "Year": 2022,
+          "OOF bars": 12550,
+          "Signals": 623,
+          "Drift base %": 47.0,
+          "Skill success %": 71.4,
+          "Trade success %": 53.0,
+          "Skill edge pp": 30.7
+        },
+        {
+          "Year": 2023,
+          "OOF bars": 12500,
+          "Signals": 0,
+          "Drift base %": 61.7,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2024,
+          "OOF bars": 12600,
+          "Signals": 0,
+          "Drift base %": 60.4,
+          "Skill success %": null,
+          "Trade success %": null,
+          "Skill edge pp": null
+        },
+        {
+          "Year": 2025,
+          "OOF bars": 12500,
+          "Signals": 43,
+          "Drift base %": 56.1,
+          "Skill success %": 67.4,
+          "Trade success %": 60.5,
+          "Skill edge pp": 20.1
+        },
+        {
+          "Year": 2026,
+          "OOF bars": 6950,
+          "Signals": 15,
+          "Drift base %": 51.0,
+          "Skill success %": 40.0,
+          "Trade success %": 33.3,
+          "Skill edge pp": -6.5
+        }
+      ]
+    }
+  },
+  "verdicts": {
+    "short": "361 signals (0.4% of bars): skill 63.4% vs 49.6% base (+13.8 pp); trade 44.0% vs 53.9% base (-9.8 pp); net expected -0.01% per trade after costs.",
+    "medium": "57 signals (0.1% of bars): skill 79.0% vs 49.6% base (+29.3 pp); trade 71.9% vs 50.1% base (+21.8 pp); net expected +8.79% per trade after costs.",
+    "long": "703 signals (0.8% of bars): skill 69.1% vs 49.1% base (+20.1 pp); trade 51.6% vs 43.7% base (+7.9 pp); net expected +6.95% per trade after costs."
+  }
+}

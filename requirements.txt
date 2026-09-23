@@ -1,0 +1,16 @@
+streamlit>=1.57
+yfinance>=0.2.40
+pandas>=2.2.0
+numpy>=1.26.0
+plotly>=5.20.0
+ta>=0.11.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+ccxt>=4.3.0
+scikit-learn>=1.5
+scipy>=1.13
+vaderSentiment>=3.3.2
+# Optional SMS alerts (Canadian handset supported via Twilio). Install only if
+# you enable NOTIFY_SMS_ENABLED=true. The notify/ module lazy-imports Twilio,
+# so the app runs fine without it.
+# twilio>=9.0.0

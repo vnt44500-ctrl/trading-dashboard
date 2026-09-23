@@ -1,0 +1,78 @@
+# Whole-market signal sweep on GitHub Actions (free: public repos get
+# unlimited Actions minutes). Each run scans every tradable US equity plus
+# crypto/FX/commodities through cloud_scan.py, dedups against the previous
+# run's 24h state (persisted with actions/cache, not git), and pushes fresh
+# signals to the Cloudflare Worker -> ntfy -> phone. Runs even when the PC is
+# off.
+name: Whole-market cloud scan
+
+on:
+  schedule:
+    # Weekdays: pre-open sweep, then hourly through the US session.
+    # 13:00-21:00 UTC covers 09:30-16:00 ET under both EDT and EST.
+    - cron: "0 13-21 * * 1-5"
+    # Weekends: only crypto/futures venues are live -> sweep every 6 hours.
+    - cron: "0 */6 * * 0,6"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (print the alert, do not push to the phone)"
+        type: boolean
+        default: false
+      limit:
+        description: "Cap the equity universe for smoke tests (0 = whole market)"
+        type: string
+        default: "0"
+
+# Least privilege: the workflow only reads the repo; it never pushes commits.
+permissions:
+  contents: read
+
+# Never overlap two sweeps: they share the 24h dedup state.
+concurrency:
+  group: cloud-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      # The dedup state exists only inside the job workspace. Restore the most
+      # recent previous run's state so an unchanged signal is not re-pushed on
+      # every hourly sweep (dedup window: 24h).
+      - name: Restore dedup state
+        uses: actions/cache@v4
+        with:
+          path: cloud_scan_state.json
+          key: cloud-scan-dedup-${{ github.run_id }}
+          restore-keys: |
+            cloud-scan-dedup-
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Scan whole market
+        env:
+          ALPACA_API_KEY: ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+          ALERT_TOKEN: ${{ secrets.ALERT_TOKEN }}
+          ALERT_WORKER_URL: https://sms-app.vnt44500.workers.dev
+          SCAN_DRY_RUN: ${{ inputs.dry_run == true && '1' || '0' }}
+          SCAN_LIMIT: ${{ inputs.limit || '0' }}
+        run: python cloud_scan.py
+
+      - name: Save dedup state
+        if: always()
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: cloud_scan_state.json
+          key: cloud-scan-dedup-${{ github.run_id }}
