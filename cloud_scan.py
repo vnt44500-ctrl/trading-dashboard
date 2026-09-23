@@ -476,25 +476,9 @@ def run(settings: Settings, verify: int = 0) -> int:
         time.sleep(0.3)                        # polite to Yahoo's free endpoint
 
     hits, suppressed = _score_hits(settings, store, raw_hits)
-    for hit in hits:
-        store.record(hit["symbol"], hit["timeframe"], hit["action"])
-    store.save()
-
     message = render_message(stats, hits, suppressed)
-    LOGGER.info("signals raw=%d pushed=%d suppressed=%d",
+    LOGGER.info("signals raw=%d fresh=%d suppressed=%d",
                 len(raw_hits), len(hits), suppressed)
-
-    report = {
-        "scanned_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "stats": stats,
-        "raw_signals": len(raw_hits),
-        "pushed": len(hits),
-        "suppressed_by_dedup": suppressed,
-        "signals": hits,
-        "dry_run": settings.dry_run,
-    }
-    settings.report_path.write_text(json.dumps(report, indent=1, default=str),
-                                    encoding="utf-8")
 
     if verify:
         for symbol, summary in list(verify_summaries.items())[:verify]:
@@ -503,13 +487,38 @@ def run(settings: Settings, verify: int = 0) -> int:
                               for k, v in summary.items()}, indent=1, default=str))
 
     print("\n" + message)
+
+    # Dedup is committed ONLY after the alert is confirmed delivered: a failed
+    # push (ntfy throttling, Worker outage) must leave the signals fresh so the
+    # next sweep retries them instead of silently swallowing them for 24h —
+    # run #5 lost a full sweep by recording before pushing. Dry runs never
+    # consume signals either: they push nothing, so nothing is "seen".
+    push_ok: bool | None = None
     if settings.dry_run:
         LOGGER.info("dry run: nothing pushed")
-        return 0
-    if not hits:
+    elif not hits:
         LOGGER.info("no fresh signals: nothing to push")
-        return 0
-    return 0 if push_to_worker(settings, message) else 1
+    else:
+        push_ok = push_to_worker(settings, message)
+        if push_ok:
+            for hit in hits:
+                store.record(hit["symbol"], hit["timeframe"], hit["action"])
+            store.save()
+
+    report = {
+        "scanned_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "stats": stats,
+        "raw_signals": len(raw_hits),
+        "pushed": len(hits) if push_ok else 0,
+        "push_attempted": push_ok is not None,
+        "push_ok": push_ok,
+        "suppressed_by_dedup": suppressed,
+        "signals": hits,
+        "dry_run": settings.dry_run,
+    }
+    settings.report_path.write_text(json.dumps(report, indent=1, default=str),
+                                    encoding="utf-8")
+    return 0 if push_ok is not False else 1
 
 
 def main() -> int:
@@ -539,14 +548,20 @@ def main() -> int:
 
 
 def push_to_worker(settings: Settings, message: str) -> bool:
-    """POST the finished alert to the Worker /send -> ntfy -> phone."""
+    """POST the finished alert to the Worker /send -> ntfy -> phone.
+
+    Retries with growing pauses because ntfy.sh rate-limits shared cloud egress
+    IPs (GitHub runners) with 429s that usually clear within a couple of
+    minutes. Per-attempt timeout is generous: the Worker itself runs internal
+    ntfy retries (honouring ntfy's Retry-After) before answering.
+    """
     url = f"{settings.worker_url}/send"
-    for attempt in range(3):
+    for attempt in range(4):
         try:
             response = requests.post(
                 url, json={"message": message},
                 headers={"x-alert-token": settings.alert_token},
-                timeout=30,
+                timeout=90,
             )
             if response.ok:
                 LOGGER.info("pushed: %s", response.text[:200])
@@ -555,7 +570,8 @@ def push_to_worker(settings: Settings, message: str) -> bool:
                            response.text[:200])
         except requests.RequestException as error:
             LOGGER.warning("push attempt %d failed: %s", attempt + 1, error)
-        time.sleep(5 * (attempt + 1))
+        if attempt < 3:
+            time.sleep(10 * (attempt + 1))
     return False
 
 
